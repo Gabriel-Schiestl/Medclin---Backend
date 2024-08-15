@@ -12,15 +12,7 @@ export class TypeOrmUserRepository implements IUserRepository {
         @InjectRepository(UserModel) private readonly userRepository: Repository<UserModel>,
 ) { }
 
-    async findAll(): Promise<User[]> {
-        return this.userRepository.find();
-    }
-
     async create(user: User): Promise<User> {
         return await this.userRepository.save(user);
-    }
-
-    async findById(id: number): Promise<User> {
-        return new User('name', 'email', 'password');
     }
 }
