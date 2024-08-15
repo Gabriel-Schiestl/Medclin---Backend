@@ -1,3 +1,4 @@
+import { Speciality } from "../domain/entities/speciality.entity";
 
 export class ClinicDto {
     name: string;
@@ -10,5 +11,6 @@ export class ClinicDto {
     zipCode: string;
     email: string;
     cnpj: string;
+    specialities: Speciality[];
     instagram?: string;
 }

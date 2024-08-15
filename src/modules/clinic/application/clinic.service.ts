@@ -10,7 +10,7 @@ export class ClinicService {
 
     async create(clinic: ClinicDto) {
         const address = new Address(clinic.street, clinic.number, clinic.block, clinic.city, clinic.zipCode);
-        const newClinic = new Clinic(clinic.name, clinic.telephone, clinic.description, address, clinic.email, clinic.cnpj, clinic.instagram);
+        const newClinic = new Clinic(clinic.name, clinic.telephone, clinic.description, address, clinic.email, clinic.cnpj, clinic.specialities);
         return await this.clinicRepository.create(newClinic);
     }
 }

@@ -28,7 +28,7 @@ export class Clinic {
         this.address = address;
         this.email = email;
         this.cnpj = cnpj;
-        this.specialities.push(specialities);
+        this.specialities.push(...specialities);
         this.instagram = instagram;
     }
 }

@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModel } from './modules/user/infra/models/user.model';
 import { ClinicModule } from './modules/clinic/clinic.module';
 import { ClinicModel } from './modules/clinic/infra/models/clinic.model';
+import { SpecialityModel } from './modules/clinic/infra/models/speciality.model';
 
 @Module({
   imports: [UserModule, ClinicModule, TypeOrmModule.forRoot(
@@ -14,7 +15,7 @@ import { ClinicModel } from './modules/clinic/infra/models/clinic.model';
       username: 'postgres',
       password: '12345678',
       database: 'postgres',
-      entities: [UserModel, ClinicModel],
+      entities: [UserModel, ClinicModel, SpecialityModel],
       synchronize: true,
     },
   )],
