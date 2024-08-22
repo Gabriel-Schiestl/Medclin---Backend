@@ -1,12 +1,11 @@
 import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Address } from "../../domain/entities/address.entity";
-import { Speciality } from "../../domain/entities/speciality.entity";
 import { SpecialityModel } from "./speciality.model";
 
 @Entity()
 export class ClinicModel {
 
-    @Column()
+    @PrimaryGeneratedColumn('uuid')
     id: string;
 
     @Column()
@@ -18,7 +17,7 @@ export class ClinicModel {
     @Column()
     description: string;
 
-    @Column()
+    @Column({ type: 'json' })
     address: Address;
 
     @Column()
@@ -29,7 +28,7 @@ export class ClinicModel {
 
     @ManyToMany(() => SpecialityModel, speciality => speciality.clinics)
     @JoinTable()
-    specialities: Speciality[];
+    specialities: SpecialityModel[];
 
     @Column({ nullable: true })
     instagram: string;

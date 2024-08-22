@@ -6,11 +6,11 @@ export class ClinicDto {
     description: string;
     street: string;
     number: number;
-    block: string;
     city: string;
+    state:string;
     zipCode: string;
     email: string;
     cnpj: string;
-    specialities: Speciality[];
+    specialities: number[];
     instagram?: string;
 }

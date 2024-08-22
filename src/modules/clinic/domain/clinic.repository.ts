@@ -6,4 +6,6 @@ export interface IClinicRepository {
     findById(id: string): Promise<Clinic>;
     update(id: string, clinic: Clinic): Promise<Clinic>;
     delete(id: string): Promise<void>;
+    findForSpeciality(speciality: string): Promise<Clinic[]>;
+    findForName(name: string): Promise<Clinic[]>;
 }
