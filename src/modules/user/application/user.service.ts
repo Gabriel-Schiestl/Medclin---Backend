@@ -9,7 +9,7 @@ export class UserService {
     constructor(@Inject('IUserRepository') private readonly userRepository: IUserRepository) { }
 
     async create(user: UserDto) {
-        const newUser = new User(user.name, user.email, user.password);
+        const newUser = new User(user.name, user.email, user.password, user.cpf, user.birth, user.telephone, user.documents);
         return await this.userRepository.create(newUser);
     }
 }

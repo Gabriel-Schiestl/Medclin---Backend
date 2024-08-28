@@ -1,5 +1,5 @@
 import { InjectRepository } from "@nestjs/typeorm";
-import { Clinic } from "../../domain/entities/clinic.entity";
+import { Clinic } from "../../domain/models/clinic.entity";
 import { IClinicRepository } from "../../domain/clinic.repository";
 import { ClinicModel } from "../models/clinic.model";
 import { Repository } from "typeorm";

@@ -5,19 +5,11 @@ import { UserModel } from './modules/user/infra/models/user.model';
 import { ClinicModule } from './modules/clinic/clinic.module';
 import { ClinicModel } from './modules/clinic/infra/models/clinic.model';
 import { SpecialityModel } from './modules/clinic/infra/models/speciality.model';
+import { DocumentModel } from './modules/clinic/infra/models/document.model';
+import { MedCardModel } from './modules/clinic/infra/models/medcard.model';
+import AppDataSource from 'ormconfig';
 
 @Module({
-  imports: [UserModule, ClinicModule, TypeOrmModule.forRoot(
-    {
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: '12345678',
-      database: 'postgres',
-      entities: [UserModel, ClinicModel, SpecialityModel],
-      synchronize: true,
-    },
-  )],
+  imports: [UserModule, ClinicModule, TypeOrmModule.forRoot(AppDataSource.options)],
 })
 export class AppModule {}

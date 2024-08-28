@@ -1,4 +1,4 @@
-import { Clinic } from "./entities/clinic.entity";
+import { Clinic } from "./models/clinic.entity";
 
 export interface IClinicRepository {
     create(clinic: Clinic): Promise<Clinic>;

@@ -1,5 +1,5 @@
 import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Address } from "../../domain/entities/address.entity";
+import { Address } from "../../domain/models/address.entity";
 import { SpecialityModel } from "./speciality.model";
 
 @Entity()

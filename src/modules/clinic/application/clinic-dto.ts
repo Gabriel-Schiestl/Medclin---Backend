@@ -1,4 +1,4 @@
-import { Speciality } from "../domain/entities/speciality.entity";
+import { Speciality } from "../domain/models/speciality.entity";
 
 export class ClinicDto {
     name: string;

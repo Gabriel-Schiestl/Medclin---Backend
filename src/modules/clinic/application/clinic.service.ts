@@ -1,7 +1,7 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { IClinicRepository } from "../domain/clinic.repository";
-import { Clinic } from "../domain/entities/clinic.entity";
-import { Address } from "../domain/entities/address.entity";
+import { Clinic } from "../domain/models/clinic.entity";
+import { Address } from "../domain/models/address.entity";
 import { ClinicDto } from "./clinic-dto";
 import { InjectRepository } from "@nestjs/typeorm";
 import { SpecialityModel } from "../infra/models/speciality.model";
