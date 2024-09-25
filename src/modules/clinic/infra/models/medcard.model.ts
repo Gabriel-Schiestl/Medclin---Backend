@@ -1,20 +1,25 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { DocumentModel } from "./document.model";
-import { UserModel } from "src/modules/user/infra/models/user.model";
-
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { DocumentModel } from './document.model';
+import { UserModel } from 'src/modules/user/infra/models/user.model';
 
 @Entity()
-export class MedCardModel {
-    
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+export class MedCardModel extends BaseEntity {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @OneToMany(() => DocumentModel, document => document.medCard)
-    documents: DocumentModel[];
+  @OneToMany(() => DocumentModel, (document) => document.medCard)
+  documents: DocumentModel[];
 
-    @Column({type: 'jsonb'})
-    personalInformations: UserModel;
+  @OneToOne(() => UserModel)
+  personalInformations: UserModel;
 
-    @Column()
-    status: boolean;
+  @Column()
+  status: boolean;
 }
