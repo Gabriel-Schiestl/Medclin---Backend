@@ -5,27 +5,26 @@ import { Column, Entity, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn
 
 @Entity()
 export class UserModel {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+  @Column()
+  name: string;
 
-    @Column()
-    name: string;
+  @Column()
+  email: string;
 
-    @Column()
-    email: string;
+  @Column()
+  password: string;
 
-    @Column()
-    password: string;
+  @Column()
+  cpf: string;
 
-    @Column()
-    cpf: string;
+  @Column()
+  birth: Date;
 
-    @Column()
-    birth: Date;
-
-    @Column()
-    telephone: string;
+  @Column()
+  telephone: string;
 
     @Column({nullable: true})
     photo: string;

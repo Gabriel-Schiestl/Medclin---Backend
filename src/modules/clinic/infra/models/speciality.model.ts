@@ -1,16 +1,20 @@
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
-import { ClinicModel } from "./clinic.model";
-
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { ClinicModel } from './clinic.model';
 
 @Entity()
-export class SpecialityModel {
+export class SpecialityModel extends BaseEntity {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id: number;
+  @Column()
+  name: string;
 
-    @Column()
-    name: string;
-
-    @ManyToMany(() => ClinicModel, clinic => clinic.specialities)
-    clinics: ClinicModel[];
+  @ManyToMany(() => ClinicModel, (clinic) => clinic.specialities)
+  clinics: ClinicModel[];
 }

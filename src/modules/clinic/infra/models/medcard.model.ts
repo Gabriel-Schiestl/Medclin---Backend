@@ -4,18 +4,17 @@ import { UserModel } from "src/modules/user/infra/models/user.model";
 
 
 @Entity()
-export class MedCardModel {
-    
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+export class MedCardModel extends BaseEntity {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @OneToMany(() => DocumentModel, document => document.medCard)
-    documents: DocumentModel[];
+  @OneToMany(() => DocumentModel, (document) => document.medCard)
+  documents: DocumentModel[];
 
     @OneToOne(() => UserModel, user => user.medcard)
     @JoinColumn({name: 'userId'})
     userId: UserModel;
 
-    @Column()
-    status: boolean;
+  @Column()
+  status: boolean;
 }

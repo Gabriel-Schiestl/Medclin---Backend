@@ -1,36 +1,96 @@
-import { Inject, Injectable } from "@nestjs/common";
-import { IClinicRepository } from "../domain/clinic.repository";
-import { Clinic } from "../domain/models/clinic.entity";
-import { Address } from "../domain/models/address.entity";
-import { ClinicDto } from "./clinic-dto";
-import { InjectRepository } from "@nestjs/typeorm";
-import { SpecialityModel } from "../infra/models/speciality.model";
-import { In, Repository } from "typeorm";
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { IClinicRepository } from '../domain/clinic.repository';
+import { Clinic } from '../domain/models/clinic.entity';
+import { Address } from '../domain/models/address.entity';
+import { ClinicDto } from './clinic-dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { SpecialityModel } from '../infra/models/speciality.model';
+import { In, Repository } from 'typeorm';
 
 @Injectable()
 export class ClinicService {
-    constructor(@Inject('IClinicRepository') private readonly clinicRepository: IClinicRepository,
-    @InjectRepository(SpecialityModel) private readonly specialityRepository: Repository<SpecialityModel>
-) { }
+  constructor(
+    @Inject('IClinicRepository')
+    private readonly clinicRepository: IClinicRepository,
+    @InjectRepository(SpecialityModel)
+    private readonly specialityRepository: Repository<SpecialityModel>,
+  ) {}
 
-    async create(clinic: ClinicDto) {
-        const address = new Address(clinic.street, clinic.number, clinic.state, clinic.city, clinic.zipCode);
+  async create(clinic: ClinicDto) {
+    const address = new Address(
+      clinic.street,
+      clinic.number,
+      clinic.state,
+      clinic.city,
+      clinic.zipCode,
+    );
 
-        const specialities = await this.specialityRepository.findBy({ id: In(clinic.specialities) });
+    const specialities = await this.specialityRepository.findBy({
+      id: In(clinic.specialities),
+    });
 
-        const newClinic = new Clinic(clinic.name, clinic.telephone, clinic.description, address, clinic.email, clinic.cnpj, specialities, clinic.instagram);
-        return await this.clinicRepository.create(newClinic);
+    const newClinic = new Clinic(
+      clinic.name,
+      clinic.telephone,
+      clinic.description,
+      address,
+      clinic.email,
+      clinic.cnpj,
+      specialities,
+      clinic.instagram,
+    );
+    return await this.clinicRepository.create(newClinic);
+  }
+
+  async findForSpeciality(speciality: string) {
+    return await this.clinicRepository.findForSpeciality(speciality);
+  }
+
+  async findForName(name: string) {
+    return await this.clinicRepository.findForName(name);
+  }
+
+  async findAll() {
+    return await this.clinicRepository.findAll();
+  }
+
+  async update(id: string, clinicDto: ClinicDto) {
+    const clinic = await this.clinicRepository.findById(id);
+
+    if (!clinic) {
+      throw new NotFoundException(`Clinica com ID ${id} não encontrada`);
     }
 
-    async findForSpeciality(speciality: string) {
-        return await this.clinicRepository.findForSpeciality(speciality);
+    const address = new Address(
+      clinicDto.street,
+      clinicDto.number,
+      clinicDto.state,
+      clinicDto.city,
+      clinicDto.zipCode,
+    );
+    const specialities = await this.specialityRepository.findBy({
+      id: In(clinicDto.specialities),
+    });
+
+    clinic.name = clinicDto.name;
+    clinic.telephone = clinicDto.telephone;
+    clinic.description = clinicDto.description;
+    clinic.address = address;
+    clinic.email = clinicDto.email;
+    clinic.cnpj = clinicDto.cnpj;
+    clinic.specialities = specialities;
+    clinic.instagram = clinicDto.instagram;
+
+    return await this.clinicRepository.update(clinic);
+  }
+
+  async delete(id: string) {
+    const clinic = await this.clinicRepository.findById(id);
+
+    if (!clinic) {
+      throw new NotFoundException(`Clinica com ID ${id} não encontrada`);
     }
 
-    async findForName(name: string) {
-        return await this.clinicRepository.findForName(name);
-    }
-
-    async findAll() {
-        return await this.clinicRepository.findAll();
-    }
+    return await this.clinicRepository.delete(id);
+  }
 }
