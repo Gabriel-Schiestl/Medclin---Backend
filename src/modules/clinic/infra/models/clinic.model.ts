@@ -9,7 +9,7 @@ import {
 import { Address } from '../../domain/models/address.entity';
 import { SpecialityModel } from './speciality.model';
 
-@Entity()
+@Entity({ name: 'clinica' })
 export class ClinicModel extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -20,8 +20,8 @@ export class ClinicModel extends BaseEntity {
   @Column()
   telephone: string;
 
-    @Column({nullable: true})
-    description: string;
+  @Column({ nullable: true })
+  description: string;
 
   @Column({ type: 'json' })
   address: Address;
@@ -33,7 +33,7 @@ export class ClinicModel extends BaseEntity {
   cnpj: string;
 
   @ManyToMany(() => SpecialityModel, (speciality) => speciality.clinics)
-  @JoinTable()
+  @JoinTable({ name: 'clinica_especialidades' })
   specialities: SpecialityModel[];
 
   @Column({ nullable: true })

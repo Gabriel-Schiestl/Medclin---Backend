@@ -1,9 +1,15 @@
-import { UserModel } from "src/modules/user/infra/models/user.model";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { MedCardModel } from "./medcard.model";
+import { UserModel } from 'src/modules/user/infra/models/user.model';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { MedCardModel } from './medcard.model';
 
-
-@Entity()
+@Entity({ name: 'documento' })
 export class DocumentModel extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -20,7 +26,7 @@ export class DocumentModel extends BaseEntity {
   @ManyToOne(() => UserModel, (user) => user.documents)
   user: UserModel;
 
-    @ManyToOne(() => MedCardModel, card => card.documents)
-    @JoinColumn({name: 'medCardId'})
-    medCard: MedCardModel;
+  @ManyToOne(() => MedCardModel, (card) => card.documents)
+  @JoinColumn({ name: 'medCardId' })
+  medCard: MedCardModel;
 }

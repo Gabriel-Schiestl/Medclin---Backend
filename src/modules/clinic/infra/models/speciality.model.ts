@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 import { ClinicModel } from './clinic.model';
 
-@Entity()
+@Entity({ name: 'especialidade' })
 export class SpecialityModel extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
