@@ -1,5 +1,6 @@
 import { DocumentModel } from "src/modules/clinic/infra/models/document.model";
-import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { MedCardModel } from "src/modules/clinic/infra/models/medcard.model";
+import { Column, Entity, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity()
@@ -26,9 +27,12 @@ export class UserModel {
     @Column()
     telephone: string;
 
-    @Column()
+    @Column({nullable: true})
     photo: string;
 
     @OneToMany(() => DocumentModel, document => document.user)
     documents: DocumentModel[];
+
+    @OneToOne(() => MedCardModel, medcard => medcard.userId)
+    medcard: MedCardModel
 }

@@ -1,5 +1,5 @@
 import { UserModel } from "src/modules/user/infra/models/user.model";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { MedCardModel } from "./medcard.model";
 
 
@@ -22,5 +22,6 @@ export class DocumentModel {
     user: UserModel;
 
     @ManyToOne(() => MedCardModel, card => card.documents)
+    @JoinColumn({name: 'medCardId'})
     medCard: MedCardModel;
 }

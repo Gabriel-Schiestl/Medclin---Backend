@@ -14,7 +14,7 @@ export class ClinicModel {
     @Column()
     telephone: string;
 
-    @Column()
+    @Column({nullable: true})
     description: string;
 
     @Column({ type: 'json' })
