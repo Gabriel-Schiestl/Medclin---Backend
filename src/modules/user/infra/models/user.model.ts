@@ -1,11 +1,19 @@
-import { DocumentModel } from "src/modules/clinic/infra/models/document.model";
-import { MedCardModel } from "src/modules/clinic/infra/models/medcard.model";
-import { Column, Entity, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-
+import { DocumentModel } from 'src/modules/clinic/infra/models/document.model';
+import { MedCardModel } from 'src/modules/clinic/infra/models/medcard.model';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  ManyToMany,
+  OneToMany,
+  OneToOne,
+  PrimaryColumn,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
-export class UserModel {
-  @PrimaryGeneratedColumn('uuid')
+export class UserModel extends BaseEntity {
+  @PrimaryColumn({ type: 'uuid' })
   id: string;
 
   @Column()
@@ -26,12 +34,12 @@ export class UserModel {
   @Column()
   telephone: string;
 
-    @Column({nullable: true})
-    photo: string;
+  @Column({ nullable: true })
+  photo: string;
 
-    @OneToMany(() => DocumentModel, document => document.user)
-    documents: DocumentModel[];
+  @OneToMany(() => DocumentModel, (document) => document.user)
+  documents: DocumentModel[];
 
-    @OneToOne(() => MedCardModel, medcard => medcard.userId)
-    medcard: MedCardModel
+  @OneToOne(() => MedCardModel, (medcard) => medcard.userId)
+  medcard: MedCardModel;
 }

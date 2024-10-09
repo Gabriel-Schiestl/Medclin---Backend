@@ -4,6 +4,7 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  PrimaryColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Address } from '../../domain/models/address.entity';
@@ -11,7 +12,7 @@ import { SpecialityModel } from './speciality.model';
 
 @Entity({ name: 'clinica' })
 export class ClinicModel extends BaseEntity {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn({ type: 'uuid' })
   id: string;
 
   @Column()

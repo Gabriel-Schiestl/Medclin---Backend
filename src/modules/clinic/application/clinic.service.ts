@@ -6,6 +6,7 @@ import { ClinicDto } from './clinic-dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { SpecialityModel } from '../infra/models/speciality.model';
 import { In, Repository } from 'typeorm';
+import { Speciality } from '../domain/models/speciality.entity';
 
 @Injectable()
 export class ClinicService {
@@ -25,9 +26,11 @@ export class ClinicService {
       clinic.zipCode,
     );
 
-    const specialities = await this.specialityRepository.findBy({
+    const specialitiesDb = await this.specialityRepository.findBy({
       id: In(clinic.specialities),
     });
+
+    const specialities: Speciality[] = specialitiesDb;
 
     const newClinic = new Clinic(
       clinic.name,
@@ -68,9 +71,11 @@ export class ClinicService {
       clinicDto.city,
       clinicDto.zipCode,
     );
-    const specialities = await this.specialityRepository.findBy({
+    const specialitiesDb = await this.specialityRepository.findBy({
       id: In(clinicDto.specialities),
     });
+
+    const specialities: Speciality[] = specialitiesDb;
 
     clinic.name = clinicDto.name;
     clinic.telephone = clinicDto.telephone;
@@ -92,5 +97,10 @@ export class ClinicService {
     }
 
     return await this.clinicRepository.delete(id);
+  }
+
+  async createSpeciality(name: string) {
+    const speciality = new Speciality(name);
+    return await this.specialityRepository.save(speciality);
   }
 }

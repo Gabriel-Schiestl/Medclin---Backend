@@ -3,14 +3,15 @@ import {
   Column,
   Entity,
   ManyToMany,
+  PrimaryColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { ClinicModel } from './clinic.model';
 
 @Entity({ name: 'especialidade' })
 export class SpecialityModel extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryColumn({ type: 'uuid' })
+  id: string;
 
   @Column()
   name: string;

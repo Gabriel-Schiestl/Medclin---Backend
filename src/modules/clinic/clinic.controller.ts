@@ -10,6 +10,10 @@ import {
 import { ClinicService } from './application/clinic.service';
 import { ClinicDto } from './application/clinic-dto';
 
+interface SpecialityProp {
+  name: string;
+}
+
 @Controller('clinics')
 export class ClinicController {
   constructor(private readonly clinicService: ClinicService) {}
@@ -17,6 +21,11 @@ export class ClinicController {
   @Post()
   async create(@Body() clinic: ClinicDto) {
     return await this.clinicService.create(clinic);
+  }
+
+  @Post('/speciality')
+  async createSpeciality(@Body() data: SpecialityProp) {
+    return await this.clinicService.createSpeciality(data.name);
   }
 
   @Get('/speciality/:speciality')
