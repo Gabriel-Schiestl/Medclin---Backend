@@ -13,15 +13,12 @@ import { UserModel } from 'src/modules/user/infra/models/user.model';
 
 @Entity({ name: 'medcard' })
 export class MedCardModel extends BaseEntity {
-  @PrimaryColumn({ type: 'uuid' })
+  @PrimaryGeneratedColumn('uuid')
   id: string;
-
-  @OneToMany(() => DocumentModel, (document) => document.medCard)
-  documents: DocumentModel[];
 
   @OneToOne(() => UserModel, (user) => user.medcard)
   @JoinColumn({ name: 'userId' })
-  userId: UserModel;
+  user: UserModel;
 
   @Column()
   status: boolean;

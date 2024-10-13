@@ -5,18 +5,11 @@ import { GenerateId } from '../generateId';
 
 export class MedCard {
   id: string;
-  documents: DocumentModel[];
   personalInformations: UserModel;
   status: boolean;
 
-  constructor(
-    id: string,
-    documents: DocumentModel[],
-    personalInformations: UserModel,
-    status: boolean,
-  ) {
+  constructor(id: string, personalInformations: UserModel, status: boolean) {
     this.id = GenerateId.generate();
-    this.documents = documents;
     this.personalInformations = personalInformations;
     this.status = status;
   }

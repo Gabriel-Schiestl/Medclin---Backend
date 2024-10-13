@@ -40,6 +40,6 @@ export class UserModel extends BaseEntity {
   @OneToMany(() => DocumentModel, (document) => document.user)
   documents: DocumentModel[];
 
-  @OneToOne(() => MedCardModel, (medcard) => medcard.userId)
+  @OneToOne(() => MedCardModel, (medcard) => medcard.user)
   medcard: MedCardModel;
 }

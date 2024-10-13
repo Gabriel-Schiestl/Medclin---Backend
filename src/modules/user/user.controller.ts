@@ -29,7 +29,7 @@ export class UserController {
     return await this.userService.findByEmail(email);
   }
 
-  @Get('/id/:id')
+  @Get('/:id')
   async findById(@Param() id: string) {
     return await this.userService.findById(id);
   }

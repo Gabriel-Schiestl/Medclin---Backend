@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { IUserRepository } from '../domain/user.repository';
 import { UserDto } from './user-dto';
 import { User } from '../domain/user.entity';
+import { MedCardModel } from 'src/modules/clinic/infra/models/medcard.model';
 
 @Injectable()
 export class UserService {
@@ -17,8 +18,10 @@ export class UserService {
       user.cpf,
       user.birth,
       user.telephone,
-      user.documents,
     );
+
+    await MedCardModel.create({ user: newUser, status: false });
+
     return await this.userRepository.create(newUser);
   }
 
@@ -51,7 +54,6 @@ export class UserService {
     userExists.cpf = user.cpf;
     userExists.birth = user.birth;
     userExists.telephone = user.telephone;
-    userExists.documents = user.documents;
 
     return await this.userRepository.update(userExists);
   }

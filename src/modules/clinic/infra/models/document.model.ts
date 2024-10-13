@@ -24,10 +24,10 @@ export class DocumentModel extends BaseEntity {
   @Column()
   tamanho: number;
 
-  @ManyToOne(() => UserModel, (user) => user.documents)
-  user: UserModel;
+  @Column()
+  userId: string;
 
-  @ManyToOne(() => MedCardModel, (card) => card.documents)
-  @JoinColumn({ name: 'medCardId' })
-  medCard: MedCardModel;
+  @ManyToOne(() => UserModel, (user) => user.documents)
+  @JoinColumn({ name: 'userId' })
+  user: UserModel;
 }
