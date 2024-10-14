@@ -43,4 +43,9 @@ export class UserController {
   async update(@Param() id: string, @Body() user: UserDto) {
     return await this.userService.update(id, user);
   }
+
+  @Post('/medcard/:id')
+  async ativar(@Param() id: string) {
+    return await this.userService.ativar(id);
+  }
 }

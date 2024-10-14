@@ -57,4 +57,22 @@ export class UserService {
 
     return await this.userRepository.update(userExists);
   }
+
+  async ativar(id: string) {
+    const user = await this.userRepository.findById(id);
+
+    if (!user) {
+      throw new Error('Usuário não encontrado');
+    }
+
+    const medcard = await MedCardModel.findOneBy({ user: user });
+
+    if (!medcard) {
+      throw new Error('Cartão não encontrado');
+    }
+
+    medcard.status = true;
+
+    return await medcard.save();
+  }
 }
